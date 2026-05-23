@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://drank22iibnkl"]
+
+[ext_resource type="Script" uid="uid://1mud5fjaco7" path="res://scripts/audio/audio_manager.gd" id="1"]
+[ext_resource type="Script" uid="uid://cxetppjf01av2" path="res://scripts/utils/debug_overlay.gd" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/world/sky_environment.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/ui/inventory_ui.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://scenes/items/base_item.tscn" id="7_k461a"]
+[ext_resource type="PackedScene" path="res://scenes/items/grabbable_item.tscn" id="8_ocnay"]
+[ext_resource type="PackedScene" path="res://scenes/items/pickup_item.tscn" id="9_2b8qx"]
+[ext_resource type="PackedScene" path="res://scenes/items/throwable_item.tscn" id="10_vu5l7"]
+
+[sub_resource type="BoxShape3D" id="SubResource_floor_shape"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="PlaneMesh" id="SubResource_floor_mesh"]
+size = Vector2(50, 50)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_32mv2"]
+noise_type = 2
+frequency = 0.0112
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1rplp"]
+noise = SubResource("FastNoiseLite_32mv2")
+seamless = true
+normalize = false
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gb1m8"]
+noise_type = 2
+frequency = 0.0112
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hskxw"]
+noise = SubResource("FastNoiseLite_gb1m8")
+seamless = true
+as_normal_map = true
+normalize = false
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_k461a"]
+noise_type = 2
+frequency = 0.0112
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ocnay"]
+noise = SubResource("FastNoiseLite_k461a")
+seamless = true
+normalize = false
+
+[sub_resource type="StandardMaterial3D" id="SubResource_floor_mat"]
+albedo_color = Color(0.3277221, 0.47255743, 0.12027926, 1)
+albedo_texture = SubResource("NoiseTexture2D_1rplp")
+roughness_texture = SubResource("NoiseTexture2D_ocnay")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_hskxw")
+
+[node name="TestLevel" type="Node3D" unique_id=374089941]
+
+[node name="SkyEnvironment" parent="." unique_id=1744822163 instance=ExtResource("5")]
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1965695106]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=437213404]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("SubResource_floor_shape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1335716184]
+mesh = SubResource("SubResource_floor_mesh")
+surface_material_override/0 = SubResource("SubResource_floor_mat")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Floor" unique_id=1583625061]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0158691, 0.3105595, -0.26879883)
+use_collision = true
+size = Vector3(3.0317383, 0.58343506, 0.46240234)
+
+[node name="SpawnPoint" type="Marker3D" parent="." unique_id=125946060 groups=["spawn_point"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="AudioManager" type="Node" parent="." unique_id=1941989219]
+script = ExtResource("1")
+
+[node name="DebugOverlay" type="CanvasLayer" parent="." unique_id=327081793]
+script = ExtResource("2")
+
+[node name="DebugLabel" type="Label" parent="DebugOverlay" unique_id=400180375]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 400.0
+offset_bottom = 200.0
+
+[node name="HUD" parent="." unique_id=1686960228 instance=ExtResource("3")]
+
+[node name="PauseMenu" parent="." unique_id=1282754735 instance=ExtResource("4")]
+
+[node name="InventoryUI" parent="." unique_id=1875647848 instance=ExtResource("6")]
+
+[node name="BaseItem" parent="." unique_id=964577449 instance=ExtResource("7_k461a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6790178, 1.0243738, -0.3334098)
+
+[node name="GrabbableItem" parent="." unique_id=1874194814 instance=ExtResource("8_ocnay")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.034323692, 0.9804482, -0.29705155)
+
+[node name="PickupItem" parent="." unique_id=386648001 instance=ExtResource("9_2b8qx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7953455, 0.81523985, -0.29098058)
+
+[node name="ThrowableItem" parent="." unique_id=172533210 instance=ExtResource("10_vu5l7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3065839, 0.79436016, -0.2468782)

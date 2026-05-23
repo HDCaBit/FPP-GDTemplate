@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+item_id = "pistol"
+item_name = "Pistol"
+description = "A standard semi-automatic pistol."
+item_type = 2
+max_stack_size = 1
+weight = 1.5
+is_droppable = true
+is_throwable = false
+is_equippable = true
+damage = 25.0
+attack_speed = 1.0
+range_override = 200.0
+max_ammo = 12
+ammo_per_reload = 12

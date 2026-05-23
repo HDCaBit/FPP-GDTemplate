@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://input_manager_scene"]
+
+[node name="InputManager" type="Node"]

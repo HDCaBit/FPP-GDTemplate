@@ -1,0 +1,80 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/player/player_interaction.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/player/player_movement.gd" id="4"]
+[ext_resource type="Script" path="res://scripts/player/player_health.gd" id="5"]
+[ext_resource type="Script" path="res://scripts/player/player_stamina.gd" id="6"]
+[ext_resource type="Script" path="res://scripts/audio/footstep_system.gd" id="7"]
+[ext_resource type="Script" path="res://scripts/inventory/inventory_system.gd" id="8"]
+[ext_resource type="Script" path="res://scripts/actions/action_handler.gd" id="9"]
+[ext_resource type="Script" path="res://scripts/actions/action_attack.gd" id="10"]
+[ext_resource type="Script" path="res://scripts/actions/action_shoot.gd" id="11"]
+[ext_resource type="Script" path="res://scripts/actions/action_throw.gd" id="12"]
+[ext_resource type="Script" path="res://scripts/actions/action_drop.gd" id="13"]
+[ext_resource type="Script" path="res://scripts/actions/action_grab.gd" id="14"]
+[ext_resource type="Script" path="res://scripts/actions/action_collect.gd" id="15"]
+
+[sub_resource type="CapsuleShape3D" id="SubResource_capsule"]
+radius = 0.4
+height = 1.8
+
+[node name="PlayerController" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 37
+script = ExtResource("1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("SubResource_capsule")
+
+[node name="CameraRig" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+script = ExtResource("2")
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig"]
+fov = 75.0
+near = 0.05
+
+[node name="InteractionDetector" type="Node3D" parent="CameraRig/Camera3D"]
+script = ExtResource("3")
+
+[node name="HandRig" type="Node3D" parent="CameraRig" groups=["hand_rig"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.3, -0.5)
+
+[node name="PlayerMovement" type="Node3D" parent="."]
+script = ExtResource("4")
+
+[node name="PlayerHealth" type="Node" parent="."]
+script = ExtResource("5")
+
+[node name="PlayerStamina" type="Node" parent="."]
+script = ExtResource("6")
+
+[node name="FootstepSystem" type="Node" parent="."]
+script = ExtResource("7")
+
+[node name="InventorySystem" type="Node" parent="."]
+script = ExtResource("8")
+
+[node name="ActionHandler" type="Node" parent="."]
+script = ExtResource("9")
+
+[node name="ActionAttack" type="Node" parent="ActionHandler"]
+script = ExtResource("10")
+
+[node name="ActionShoot" type="Node" parent="ActionHandler"]
+script = ExtResource("11")
+
+[node name="ActionThrow" type="Node" parent="ActionHandler"]
+script = ExtResource("12")
+
+[node name="ActionDrop" type="Node" parent="ActionHandler"]
+script = ExtResource("13")
+
+[node name="ActionGrab" type="Node" parent="ActionHandler"]
+script = ExtResource("14")
+
+[node name="ActionCollect" type="Node" parent="ActionHandler"]
+script = ExtResource("15")

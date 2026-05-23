@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+item_id = "key_card"
+item_name = "Key Card"
+description = "A security key card for restricted areas."
+item_type = 5
+max_stack_size = 1
+weight = 0.1
+is_droppable = true
+is_throwable = false
+is_equippable = false

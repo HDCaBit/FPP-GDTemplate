@@ -1,0 +1,24 @@
+# Godot 4.x specific
+.godot/
+
+# Export templates
+*.export_presets.cfg
+
+# Mono/.NET
+.mono/
+data_*/
+
+# OS generated
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build
+*.import
